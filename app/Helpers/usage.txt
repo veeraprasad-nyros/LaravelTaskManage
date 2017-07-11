@@ -1,0 +1,37 @@
+create a Helpers Folder inside the app directory
+create a ImageResize.php file 
+create a alieas for this file at config/app.php file
+    Ex: 'ImageResize' => App\Helpers\ImageResize::class, 
+
+    When using in controller the place the 
+       use App\Helpers\ImageResize;
+    before the class
+
+    Then use like this
+
+    $imageUrl = "/home/nyros/Desktop/195249.png";
+	$toDirPath = './resize/';
+	//echo ImageResize::customCropImage($imageUrl, $toDirPath ,600, 250);
+	//echo ImageResize::eventImage($imageUrl, $toDirPath);
+	//echo ImageResize::backgroundImage($imageUrl, $toDirPath);
+	//echo ImageResize::thumbsImageCenter($imageUrl, $toDirPath, 200, 200);
+	echo ImageResize::createThumbActual($imageUrl, $toDirPath, 32, 32);
+
+
+	at controller:
+
+	namespace App\Http\Controllers;
+
+	use App\Helpers\ImageResize;
+
+	class SomeController extends Controller
+	{
+
+	    public function __construct()
+	    {
+	        ImageResize::eventImage("http://www.planwallpaper.com/static/images/6775415-beautiful-images.jpg", "./uploads/attachments/");
+	    }
+
+	at view blade
+
+	 {{ ImageResize::eventImage("http://www.planwallpaper.com/static/images/6775415-beautiful-images.jpg", "./uploads/attachments/") }}
